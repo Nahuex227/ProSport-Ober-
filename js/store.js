@@ -159,6 +159,79 @@ window.PS = window.PS || {};
       });
     },
 
+    soyAdmin() {
+      return iniciar().then((ok) => {
+        if (!ok || !cliente) return false;
+        return PS.store.sesion().then((usuario) => {
+          if (!usuario?.email) return false;
+          return cliente
+            .from(cfg.tablas.admins)
+            .select("email")
+            .ilike("email", usuario.email)
+            .maybeSingle()
+            .then((r) => !r.error && !!r.data);
+        });
+      });
+    },
+
+    listarProductosAdmin() {
+      return iniciar().then((ok) => {
+        if (!ok) throw new Error(ultimoMotivo || "Sin conexión");
+        return cliente
+          .from(cfg.tablas.productos)
+          .select("*")
+          .order("orden", { ascending: true })
+          .then((r) => {
+            if (r.error) throw r.error;
+            return r.data || [];
+          });
+      });
+    },
+
+    guardarProducto(datos) {
+      return iniciar().then((ok) => {
+        if (!ok) throw new Error(ultimoMotivo || "Sin conexión");
+        return cliente
+          .from(cfg.tablas.productos)
+          .upsert(datos, { onConflict: "id" })
+          .select()
+          .single()
+          .then((r) => {
+            if (r.error) throw r.error;
+            return r.data;
+          });
+      });
+    },
+
+    eliminarProducto(id) {
+      return iniciar().then((ok) => {
+        if (!ok) throw new Error(ultimoMotivo || "Sin conexión");
+        return cliente
+          .from(cfg.tablas.productos)
+          .delete()
+          .eq("id", id)
+          .then((r) => {
+            if (r.error) throw r.error;
+            return true;
+          });
+      });
+    },
+
+    subirFotoProducto(archivo, idProducto) {
+      return iniciar().then((ok) => {
+        if (!ok) throw new Error(ultimoMotivo || "Sin conexión");
+        const ext = (archivo.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
+        const ruta = `${idProducto}-${Date.now()}.${ext || "jpg"}`;
+        return cliente.storage
+          .from(cfg.bucketProductos)
+          .upload(ruta, archivo, { cacheControl: "3600", upsert: false })
+          .then((r) => {
+            if (r.error) throw r.error;
+            return cliente.storage.from(cfg.bucketProductos).getPublicUrl(ruta).data.publicUrl;
+          });
+      });
+    },
+
     sesion() {
       return iniciar().then((ok) => {
         if (!ok || !cliente) return null;

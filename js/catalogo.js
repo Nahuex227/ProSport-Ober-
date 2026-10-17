@@ -6,7 +6,8 @@ PS.catalogo = {
     { clave: "suplementos", titulo: "Suplementos y nutrición", ancla: "suplementos" },
     { clave: "indumentaria", titulo: "Indumentaria deportiva", ancla: "indumentaria" },
     { clave: "calzado", titulo: "Calzado", ancla: "calzado" },
-    { clave: "equipamiento", titulo: "Equipamiento y accesorios", ancla: "equipamiento" },
+    { clave: "equipamiento", titulo: "Equipamiento", ancla: "equipamiento" },
+    { clave: "accesorios", titulo: "Accesorios", ancla: "accesorios" },
   ],
 
   esc(texto) {

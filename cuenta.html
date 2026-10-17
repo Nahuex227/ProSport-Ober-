@@ -74,7 +74,7 @@
                                 <label for="login-clave">Contraseña</label>
                                 <input type="password" id="login-clave" name="clave" required minlength="6" autocomplete="current-password">
                             </div>
-                            <div id="turnstile-login" class="turnstile-box" data-turnstile-mount></div>
+                            <div id="turnstile-login" class="turnstile-box"></div>
                             <button type="submit" class="boton boton-primario boton-ancho">Ingresar</button>
                         </form>
                     </div>
@@ -89,7 +89,7 @@
                                 <label for="reg-clave">Contraseña (mín. 6)</label>
                                 <input type="password" id="reg-clave" name="clave" required minlength="6" autocomplete="new-password">
                             </div>
-                            <div id="turnstile-registro" class="turnstile-box" data-turnstile-mount></div>
+                            <div id="turnstile-registro" class="turnstile-box"></div>
                             <button type="submit" class="boton boton-primario boton-ancho">Crear cuenta</button>
                         </form>
                     </div>
@@ -97,7 +97,6 @@
                     <div class="cuenta-oauth">
                         <p>O continuá con</p>
                         <button type="button" id="btn-google" class="boton boton-google boton-ancho">Google</button>
-                        <p class="cuenta-nota">Para Google: activá el proveedor en Supabase › Authentication › Providers y agregá esta URL en Redirect URLs: <code id="redirect-url"></code></p>
                     </div>
                 </div>
             </div>
@@ -119,8 +118,5 @@
     <script src="js/captcha.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/script.js"></script>
-    <script>
-      document.getElementById("redirect-url").textContent = PS.auth.urlRedirect();
-    </script>
 </body>
 </html>

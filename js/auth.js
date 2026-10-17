@@ -4,7 +4,12 @@ window.PS = window.PS || {};
 PS.auth = {
   async ensureClient() {
     const ok = await PS.store.ensure();
-    if (!ok) throw new Error("No hay conexión con Supabase. Revisá internet o config.js.");
+    if (!ok) throw new Error("No hay conexión. Revisá tu internet.");
+  },
+
+  destinoSeguro(ruta) {
+    if (ruta && /^[a-z0-9-]+\.html$/.test(ruta)) return ruta;
+    return null;
   },
 
   esArchivoLocal() {
@@ -25,17 +30,7 @@ PS.auth = {
     return null;
   },
 
-  mostrarAvisoEntorno() {
-    const id = "aviso-entorno-local";
-    if (!this.esArchivoLocal() && this.urlRedirect()) return;
-    if (document.getElementById(id)) return;
-    const div = document.createElement("div");
-    div.id = id;
-    div.className = "cuenta-aviso cuenta-aviso--error";
-    div.innerHTML =
-      "<strong>No uses file://</strong> para registrarte o Google. Abrí el sitio con <strong>Live Server</strong> y ajustá <code>auth.baseUrl</code> en config.js (ej. http://127.0.0.1:5500/sitio-base/).";
-    document.querySelector("main .contenedor")?.prepend(div);
-  },
+  mostrarAvisoEntorno() {},
 
   async actualizarNav() {
     const link = document.getElementById("nav-cuenta-link");
@@ -48,6 +43,22 @@ PS.auth = {
       link.textContent = "Ingresar";
       link.href = "cuenta.html";
     }
+
+    const esAdmin = sesion ? await PS.store.soyAdmin() : false;
+    let adminLink = document.getElementById("nav-admin-link");
+    if (esAdmin) {
+      if (!adminLink) {
+        const ul = document.querySelector(".site-nav ul");
+        ul?.insertAdjacentHTML(
+          "beforeend",
+          '<li><a href="admin.html" id="nav-admin-link" data-nav="admin">Panel</a></li>'
+        );
+        adminLink = document.getElementById("nav-admin-link");
+      }
+      if (adminLink && document.body.dataset.pagina === "admin") adminLink.classList.add("activo");
+    } else if (adminLink) {
+      adminLink.closest("li")?.remove();
+    }
   },
 
   mensajeError(err) {
@@ -56,9 +67,7 @@ PS.auth = {
     if (/email not confirmed/i.test(m)) return "Confirmá tu email antes de ingresar.";
     if (/user already registered/i.test(m)) return "Ese email ya está registrado.";
     if (/password should be at least/i.test(m)) return "La contraseña debe tener al menos 6 caracteres.";
-    if (/captcha/i.test(m)) {
-      return "Supabase pide CAPTCHA. Opciones: (1) desactivar en Supabase › Authentication › Bot Protection, o (2) poner turnstileSiteKey en config.js y completar la casilla de seguridad.";
-    }
+    if (/captcha/i.test(m)) return "Completá la verificación antes de continuar.";
     return m;
   },
 
@@ -73,7 +82,7 @@ PS.auth = {
   async registrar(email, clave, mountId) {
     await this.ensureClient();
     if (!this.urlRedirect()) {
-      throw new Error("Configurá auth.baseUrl en config.js y abrí el sitio con Live Server (no file://).");
+      throw new Error("Abrí el sitio desde el navegador para crear la cuenta.");
     }
     let captchaToken;
     if (PS.captcha.necesitaToken() && mountId) {
@@ -111,7 +120,7 @@ PS.auth = {
     await this.ensureClient();
     const redirect = this.urlRedirect();
     if (!redirect) {
-      throw new Error("Google OAuth requiere Live Server y auth.baseUrl en config.js.");
+      throw new Error("No se pudo conectar con Google.");
     }
     const { error } = await PS.store.cliente().auth.signInWithOAuth({
       provider: "google",
@@ -125,7 +134,7 @@ PS.auth = {
     if (!PS.store.cliente()) return;
     const { data } = await PS.store.cliente().auth.getSession();
     if (data?.session && window.location.search) {
-      const ret = new URLSearchParams(window.location.search).get("return");
+      const ret = PS.auth.destinoSeguro(new URLSearchParams(window.location.search).get("return"));
       window.history.replaceState({}, document.title, ret || "cuenta.html");
       if (ret) window.location.href = ret;
     }
@@ -261,6 +270,8 @@ PS.auth = {
         const destino = tab.dataset.tabAuth;
         document.getElementById("panel-login").hidden = destino !== "login";
         document.getElementById("panel-registro").hidden = destino !== "registro";
+        const caja = destino === "registro" ? "turnstile-registro" : "turnstile-login";
+        void PS.captcha.montar(caja);
       });
     });
 
@@ -271,10 +282,11 @@ PS.auth = {
         await PS.auth.entrar(fd.get("email"), fd.get("clave"), "turnstile-login");
         mostrarAviso("Sesión iniciada.", true);
         await pintarSesion();
-        const ret = new URLSearchParams(window.location.search).get("return");
+        const ret = PS.auth.destinoSeguro(new URLSearchParams(window.location.search).get("return"));
         if (ret) window.location.href = ret;
       } catch (err) {
         mostrarAviso(PS.auth.mensajeError(err), false);
+        PS.captcha.reset("turnstile-login");
       }
     });
 
@@ -286,6 +298,7 @@ PS.auth = {
         mostrarAviso("Cuenta creada. Revisá tu email si Supabase pide confirmación.", true);
       } catch (err) {
         mostrarAviso(PS.auth.mensajeError(err), false);
+        PS.captcha.reset("turnstile-registro");
       }
     });
 
@@ -303,7 +316,11 @@ PS.auth = {
       await pintarSesion();
     });
 
-    PS.store.estado().then(() => PS.auth.manejarRetornoOAuth()).then(pintarSesion).then(() => PS.auth.activarTabDesdeUrl());
+    PS.store.estado().then(() => PS.auth.manejarRetornoOAuth()).then(pintarSesion).then(() => {
+      PS.auth.activarTabDesdeUrl();
+      const registroVisible = document.getElementById("panel-registro") && !document.getElementById("panel-registro").hidden;
+      void PS.captcha.montar(registroVisible ? "turnstile-registro" : "turnstile-login");
+    });
   },
 
   init() {

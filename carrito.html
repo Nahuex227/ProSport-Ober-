@@ -51,7 +51,7 @@
                             <span>Total</span>
                             <span id="carrito-total-pagina">$0</span>
                         </div>
-                        <p class="aviso-demo">Al confirmar, el pedido se guarda en Supabase. Si iniciaste sesión, queda vinculado a tu cuenta.</p>
+                        <p class="aviso-demo">Si iniciaste sesión, el pedido queda en Mis pedidos.</p>
                     </div>
 
                     <div id="checkout-auth" class="formulario checkout-auth">
@@ -68,7 +68,7 @@
                             <form id="form-checkout-login">
                                 <div class="campo"><label for="co-login-email">Email</label><input type="email" id="co-login-email" required></div>
                                 <div class="campo"><label for="co-login-clave">Contraseña</label><input type="password" id="co-login-clave" required minlength="6"></div>
-                                <div id="turnstile-checkout-login" data-turnstile-mount></div>
+                                <div id="turnstile-checkout-login" class="turnstile-box"></div>
                                 <button type="submit" class="boton boton-primario boton-ancho">Ingresar y continuar</button>
                             </form>
                         </div>
@@ -77,10 +77,9 @@
                             <form id="form-checkout-registro">
                                 <div class="campo"><label for="co-reg-email">Email</label><input type="email" id="co-reg-email" required></div>
                                 <div class="campo"><label for="co-reg-clave">Contraseña (mín. 6)</label><input type="password" id="co-reg-clave" required minlength="6"></div>
-                                <div id="turnstile-checkout-registro" data-turnstile-mount></div>
-                                <button type="submit" class="boton boton-primario boton-ancho">Registrarme y continuar</button>
-                            </form>
-                            <p class="cuenta-nota">También podés <a href="cuenta.html?tab=registro&return=carrito.html">abrir la página Cuenta</a>.</p>
+                                <div id="turnstile-checkout-registro" class="turnstile-box"></div>
+                            <button type="submit" class="boton boton-primario boton-ancho">Registrarme y continuar</button>
+                        </form>
                         </div>
                     </div>
 

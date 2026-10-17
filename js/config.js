@@ -17,7 +17,10 @@ PS.config = {
     productos: "productos",
     pedidos: "pedidos",
     pedidoItems: "pedido_items",
+    admins: "admins",
   },
+
+  bucketProductos: "productos",
 
   tiempos: {
     sdk: 2500,
@@ -33,7 +36,7 @@ PS.config = {
     /* Vacío = detecta la URL actual (GitHub Pages o Live Server). Solo file:// necesita baseUrl manual. */
     baseUrl: "",
     redirectPath: "cuenta.html",
-    /* Site Key de Cloudflare Turnstile (el mismo widget vinculado en Supabase › Auth › Captcha) */
-    turnstileSiteKey: "",
+    /* Site key del widget Turnstile de Nahuel */
+    turnstileSiteKey: "0x4AAAAAAFZU2H3NsfWs1SCg",
   },
 };

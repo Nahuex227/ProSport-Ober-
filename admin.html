@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de productos — ProSport Oberá</title>
+    <meta name="robots" content="noindex">
+    <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-pagina="admin">
+
+    <header class="site-header">
+        <div class="contenedor site-header__inner">
+            <a href="index.html" class="site-logo">ProSport <span>Oberá</span></a>
+            <button type="button" class="nav-toggle" data-accion="menu" aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">☰</button>
+            <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+                    <li><a href="productos.html" data-nav="productos">Productos</a></li>
+                    <li><a href="cuenta.html" data-nav="cuenta" id="nav-cuenta-link">Ingresar</a></li>
+                    <li>
+                        <a href="carrito.html" data-nav="carrito" class="nav-carrito-link">
+                            Carrito
+                            <span id="nav-carrito-count" class="nav-carrito-count" hidden>0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion">
+            <div class="contenedor">
+                <h1>Panel de productos</h1>
+                <p class="catalogo-intro">Cargá productos nuevos, cambiá precios y fotos. Solo lo ven las cuentas administradoras.</p>
+                <p id="admin-aviso" class="cuenta-aviso" hidden role="status"></p>
+
+                <div id="admin-bloqueado" class="formulario" hidden>
+                    <p id="admin-bloqueado-texto">Iniciá sesión con una cuenta administradora para editar el catálogo.</p>
+                    <p style="margin-top:1rem;">
+                        <a class="boton boton-primario" id="admin-link-cuenta" href="cuenta.html?return=admin.html">Ingresar</a>
+                    </p>
+                </div>
+
+                <div id="admin-app" class="admin-grid" hidden>
+                    <aside class="admin-lista" aria-label="Productos cargados">
+                        <div class="admin-lista__head">
+                            <h2>Catálogo</h2>
+                            <button type="button" id="btn-nuevo" class="boton boton-primario">Nuevo</button>
+                        </div>
+                        <div id="admin-items"><p class="catalogo-intro">Cargando…</p></div>
+                    </aside>
+
+                    <form id="form-producto" class="formulario admin-form">
+                        <h2 id="form-titulo">Nuevo producto</h2>
+                        <div class="campo">
+                            <label for="prod-id">Código (id) *</label>
+                            <input type="text" id="prod-id" name="id" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="ej: whey-1kg">
+                            <p class="cuenta-nota">Minúsculas y guiones. No se puede cambiar después de crear el producto.</p>
+                        </div>
+                        <div class="campo">
+                            <label for="prod-nombre">Nombre *</label>
+                            <input type="text" id="prod-nombre" name="nombre" required>
+                        </div>
+                        <div class="campo-fila">
+                            <div class="campo">
+                                <label for="prod-precio">Precio (pesos) *</label>
+                                <input type="number" id="prod-precio" name="precio" required min="0" step="1">
+                            </div>
+                            <div class="campo">
+                                <label for="prod-orden">Orden</label>
+                                <input type="number" id="prod-orden" name="orden" min="0" step="1" value="1">
+                            </div>
+                        </div>
+                        <div class="campo">
+                            <label for="prod-categoria">Categoría *</label>
+                            <select id="prod-categoria" name="categoria" required>
+                                <option value="suplementos">Suplementos</option>
+                                <option value="indumentaria">Indumentaria</option>
+                                <option value="calzado">Calzado</option>
+                                <option value="equipamiento">Equipamiento</option>
+                                <option value="accesorios">Accesorios</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="prod-descripcion">Descripción</label>
+                            <textarea id="prod-descripcion" name="descripcion" rows="3"></textarea>
+                        </div>
+                        <div class="campo">
+                            <label for="prod-foto">Foto</label>
+                            <input type="file" id="prod-foto" name="foto" accept="image/jpeg,image/png,image/webp,image/gif">
+                            <img id="prod-preview" class="admin-preview" alt="" hidden>
+                        </div>
+                        <label class="checkout-modo-opt">
+                            <input type="checkbox" id="prod-activo" name="activo" checked>
+                            Visible en el catálogo
+                        </label>
+                        <div class="admin-acciones">
+                            <button type="submit" class="boton boton-primario">Guardar</button>
+                            <button type="button" id="btn-eliminar" class="boton boton-peligro" hidden>Eliminar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

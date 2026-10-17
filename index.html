@@ -6,6 +6,9 @@
     <title>ProSport Oberá — Deportes y suplementos</title>
     <meta name="description" content="Indumentaria, equipamiento y nutrición deportiva. Asesoramiento personalizado en Oberá.">
     <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body data-pagina="inicio">
@@ -35,40 +38,59 @@
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="contenedor hero-grid">
-                <div>
-                    <h1>Tu tienda de confianza en Oberá</h1>
-                    <p class="hero-lead">Indumentaria, equipamiento y nutrición deportiva. Elegí productos, armá tu carrito y confirmá el pedido — sin complicaciones.</p>
-                    <div class="hero-acciones">
-                        <a href="productos.html" class="boton boton-primario">Ver catálogo</a>
-                        <a href="carrito.html" class="boton boton-secundario">Finalizar compra</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <strong>+6</strong>
-                            <span>Productos destacados</span>
-                        </div>
-                        <div class="hero-stat">
-                            <strong>Retiro</strong>
-                            <span>En local Oberá</span>
-                        </div>
-                        <div class="hero-stat">
-                            <strong>Asesoramiento</strong>
-                            <span>Suplementación</span>
-                        </div>
-                    </div>
+    <main class="home">
+        <section class="vitrina">
+            <div class="contenedor vitrina-inner">
+                <p class="vitrina-kicker">Local en Oberá</p>
+                <h1>Lo que usás para entrenar, en una sola vitrina.</h1>
+                <p class="vitrina-lead">Suplementos, indumentaria y equipamiento. Elegís, sumás al carrito y retirás el pedido en el local.</p>
+                <div class="vitrina-acciones">
+                    <a href="productos.html" class="boton boton-fuego">Entrar al catálogo</a>
+                    <a href="asesoramiento.html" class="boton boton-linea">Asesoramiento</a>
                 </div>
-                <aside class="hero-card" aria-label="Categorías">
-                    <h2>Categorías del catálogo</h2>
-                    <ul>
-                        <li>Suplementos y nutrición</li>
-                        <li>Indumentaria Nike y Adidas</li>
-                        <li>Calzado deportivo</li>
-                        <li>Equipamiento para entrenar</li>
-                    </ul>
-                </aside>
+                <ul class="vitrina-datos">
+                    <li><strong id="home-cantidad">—</strong><span>productos activos</span></li>
+                    <li><strong>Retiro</strong><span>en el local</span></li>
+                    <li><strong>Pedido</strong><span>sin pago online</span></li>
+                </ul>
+            </div>
+            <p class="vitrina-marca" aria-hidden="true">OBERÁ</p>
+        </section>
+
+        <section class="home-bloque" aria-labelledby="titulo-rubros">
+            <div class="contenedor">
+                <div class="home-encabezado">
+                    <h2 id="titulo-rubros">Rubros</h2>
+                    <a href="productos.html">Ver todo</a>
+                </div>
+                <div class="rubros">
+                    <a class="rubro rubro--uno" href="productos.html#suplementos"><span>01</span><strong>Suplementos</strong></a>
+                    <a class="rubro rubro--dos" href="productos.html#indumentaria"><span>02</span><strong>Indumentaria</strong></a>
+                    <a class="rubro rubro--tres" href="productos.html#calzado"><span>03</span><strong>Calzado</strong></a>
+                    <a class="rubro rubro--cuatro" href="productos.html#equipamiento"><span>04</span><strong>Equipamiento</strong></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-bloque home-bloque--claro" aria-labelledby="titulo-vitrina">
+            <div class="contenedor">
+                <div class="home-encabezado">
+                    <h2 id="titulo-vitrina">En vitrina</h2>
+                    <a href="productos.html">Catálogo completo</a>
+                </div>
+                <div id="home-vitrina" class="vitrina-productos">
+                    <p class="catalogo-intro">Cargando productos…</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-cierre">
+            <div class="contenedor home-cierre-grid">
+                <div>
+                    <h2>El pedido queda registrado. El pago, en el local.</h2>
+                    <p>Armás el carrito como invitado o con tu cuenta. En Mis pedidos ves lo que ya encargaste.</p>
+                </div>
+                <a href="carrito.html" class="boton boton-fuego">Ir al carrito</a>
             </div>
         </section>
     </main>
@@ -94,6 +116,7 @@
     <script src="js/data.js"></script>
     <script src="js/store.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/inicio.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

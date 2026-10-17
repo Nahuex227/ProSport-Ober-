@@ -240,9 +240,43 @@ function initNavMovil() {
   const btn = document.querySelector("[data-accion='menu']");
   const nav = document.getElementById("nav-principal");
   if (!btn || !nav) return;
-  btn.addEventListener("click", () => {
-    const abierto = nav.classList.toggle("abierto");
+
+  btn.textContent = "Menú";
+
+  if (!nav.querySelector(".menu-cabecera")) {
+    nav.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="menu-cabecera">
+        <strong>ProSport Oberá</strong>
+        <button type="button" class="menu-cerrar" aria-label="Cerrar menú">&times;</button>
+      </div>`
+    );
+  }
+
+  let overlay = document.getElementById("menu-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "menu-overlay";
+    overlay.className = "menu-overlay";
+    overlay.hidden = true;
+    document.body.appendChild(overlay);
+  }
+
+  const setAbierto = (abierto) => {
+    nav.classList.toggle("abierto", abierto);
+    overlay.hidden = !abierto;
     btn.setAttribute("aria-expanded", abierto ? "true" : "false");
+    document.body.classList.toggle("menu-abierto", abierto);
+  };
+
+  btn.addEventListener("click", () => setAbierto(!nav.classList.contains("abierto")));
+  overlay.addEventListener("click", () => setAbierto(false));
+  nav.querySelector(".menu-cerrar")?.addEventListener("click", () => setAbierto(false));
+  nav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) setAbierto(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setAbierto(false);
   });
 }
 
@@ -320,6 +354,7 @@ function initCheckoutModo() {
         aviso.hidden = false;
         aviso.textContent = PS.auth.mensajeError(err);
       }
+      PS.captcha.reset("turnstile-checkout-login");
     }
   });
 
@@ -343,6 +378,7 @@ function initCheckoutModo() {
         aviso.className = "cuenta-aviso cuenta-aviso--error";
         aviso.textContent = PS.auth.mensajeError(err);
       }
+      PS.captcha.reset("turnstile-checkout-registro");
     }
   });
 

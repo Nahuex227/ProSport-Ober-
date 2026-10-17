@@ -20,10 +20,22 @@ Supabase tiene CAPTCHA activo. Para el TP (más simple):
 
 - **Authentication › Bot and Abuse Protection** → desactivar CAPTCHA en signup/login
 
-O bien: crear widget en Cloudflare Turnstile, vincularlo en Supabase y poner el **Site Key** en `config.js` → `auth.turnstileSiteKey`.
+Turnstile tiene que crearse en la cuenta de Cloudflare de Nahuel, no en otra. Dominios del widget: `localhost`, `127.0.0.1` y `nahuex227.github.io`. La site key va en `config.js` → `auth.turnstileSiteKey`. La secret key va en Supabase → Authentication → Attack Protection → Turnstile.
 
 ### 3. Google OAuth
 Providers › Google + Redirect URLs como arriba (HTTP, no file).
+
+## Panel de productos
+
+Página `admin.html`. Solo los emails de la tabla `admins` pueden crear, editar, borrar productos y subir fotos al bucket `productos`.
+
+El primer admin cargado es `dic0408@gmail.com`. Para sumar otro:
+
+```sql
+insert into public.admins (email) values ('otro@email.com');
+```
+
+Con sesión de admin aparece el enlace **Panel** en el menú.
 
 ## Checkout
 

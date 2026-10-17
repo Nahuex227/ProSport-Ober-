@@ -27,23 +27,27 @@ PS.captcha = {
     });
   },
 
+  reset(mountId) {
+    delete this._tokens[mountId];
+    const el = document.getElementById(mountId);
+    if (el && window.turnstile && el.dataset.turnstileId) {
+      window.turnstile.reset(el.dataset.turnstileId);
+    }
+  },
+
   montar(elemento) {
     const mount = typeof elemento === "string" ? document.getElementById(elemento) : elemento;
     if (!mount || mount.dataset.turnstileRendered === "1") return Promise.resolve();
 
     const key = this.siteKey();
-    if (!key) {
-      mount.innerHTML =
-        '<p class="cuenta-nota">CAPTCHA: agregá <code>turnstileSiteKey</code> en config.js o desactivá CAPTCHA en Supabase › Authentication › Bot Protection.</p>';
-      return Promise.resolve();
-    }
+    if (!key) return Promise.resolve();
 
     return this.cargarScript().then(() => {
       if (!window.turnstile) return;
       const id = mount.id || `turnstile-${Math.random().toString(36).slice(2)}`;
       mount.id = id;
       mount.dataset.turnstileRendered = "1";
-      window.turnstile.render(`#${id}`, {
+      const widgetId = window.turnstile.render(`#${id}`, {
         sitekey: key,
         callback: (token) => {
           this._tokens[id] = token;
@@ -51,7 +55,11 @@ PS.captcha = {
         "expired-callback": () => {
           delete this._tokens[id];
         },
+        "error-callback": () => {
+          delete this._tokens[id];
+        },
       });
+      mount.dataset.turnstileId = widgetId;
     });
   },
 
@@ -59,7 +67,7 @@ PS.captcha = {
     const t = this._tokens[mountId];
     if (t) return t;
     throw new Error(
-      "Completá la verificación CAPTCHA (casilla de seguridad). Si no aparece, usá Live Server y configurá Turnstile en config.js."
+      "Completá la verificación antes de continuar."
     );
   },
 
