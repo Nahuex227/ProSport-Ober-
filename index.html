@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProSport Oberá — Deportes y suplementos</title>
+    <meta name="description" content="Indumentaria, equipamiento y nutrición deportiva. Asesoramiento personalizado en Oberá.">
+    <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-pagina="inicio">
+
+    <header class="site-header">
+        <div class="contenedor site-header__inner">
+            <a href="index.html" class="site-logo">ProSport <span>Oberá</span></a>
+            <button type="button" class="nav-toggle" data-accion="menu" aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">☰</button>
+            <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+                    <li><a href="nosotros.html" data-nav="nosotros">Nosotros</a></li>
+                    <li><a href="productos.html" data-nav="productos">Productos</a></li>
+                    <li><a href="asesoramiento.html" data-nav="asesoramiento">Asesoramiento</a></li>
+                    <li><a href="marcas.html" data-nav="marcas">Marcas</a></li>
+                    <li><a href="blog.html" data-nav="blog">Blog</a></li>
+                    <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+                    <li><a href="cuenta.html" data-nav="cuenta" id="nav-cuenta-link">Ingresar</a></li>
+                    <li>
+                        <a href="carrito.html" data-nav="carrito" class="nav-carrito-link">
+                            Carrito
+                            <span id="nav-carrito-count" class="nav-carrito-count" hidden>0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="contenedor hero-grid">
+                <div>
+                    <h1>Tu tienda de confianza en Oberá</h1>
+                    <p class="hero-lead">Indumentaria, equipamiento y nutrición deportiva. Elegí productos, armá tu carrito y confirmá el pedido — sin complicaciones.</p>
+                    <div class="hero-acciones">
+                        <a href="productos.html" class="boton boton-primario">Ver catálogo</a>
+                        <a href="carrito.html" class="boton boton-secundario">Finalizar compra</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <strong>+6</strong>
+                            <span>Productos destacados</span>
+                        </div>
+                        <div class="hero-stat">
+                            <strong>Retiro</strong>
+                            <span>En local Oberá</span>
+                        </div>
+                        <div class="hero-stat">
+                            <strong>Asesoramiento</strong>
+                            <span>Suplementación</span>
+                        </div>
+                    </div>
+                </div>
+                <aside class="hero-card" aria-label="Categorías">
+                    <h2>Categorías del catálogo</h2>
+                    <ul>
+                        <li>Suplementos y nutrición</li>
+                        <li>Indumentaria Nike y Adidas</li>
+                        <li>Calzado deportivo</li>
+                        <li>Equipamiento para entrenar</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor footer-grid">
+            <div>
+                <h3>ProSport Oberá</h3>
+                <p>Todo para tu rendimiento físico en un solo lugar.</p>
+            </div>
+            <div>
+                <h4>Páginas</h4>
+                <ul>
+                    <li><a href="productos.html">Catálogo</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

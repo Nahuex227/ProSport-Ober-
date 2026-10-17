@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de entrenamiento — ProSport Oberá</title>
+    <meta name="description" content="Rutinas, tips de nutrición y consejos para mejorar tu rendimiento deportivo.">
+    <!-- Enlace a tu archivo CSS general -->
+</head>
+<link rel="stylesheet" href="css/estilos.css">
+<body data-pagina="blog">
+
+    <header class="site-header">
+        <div class="contenedor site-header__inner">
+            <a href="index.html" class="site-logo">ProSport <span>Oberá</span></a>
+            <button type="button" class="nav-toggle" data-accion="menu" aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">☰</button>
+            <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+                    <li><a href="nosotros.html" data-nav="nosotros">Nosotros</a></li>
+                    <li><a href="productos.html" data-nav="productos">Productos</a></li>
+                    <li><a href="asesoramiento.html" data-nav="asesoramiento">Asesoramiento</a></li>
+                    <li><a href="marcas.html" data-nav="marcas">Marcas</a></li>
+                    <li><a href="blog.html" data-nav="blog">Blog</a></li>
+                    <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+                    <li><a href="cuenta.html" data-nav="cuenta" id="nav-cuenta-link">Ingresar</a></li>
+                    <li>
+                        <a href="carrito.html" data-nav="carrito" class="nav-carrito-link">
+                            Carrito
+                            <span id="nav-carrito-count" class="nav-carrito-count" hidden>0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL: BLOG -->
+    <main>
+        <section class="seccion">
+            <div class="contenedor">
+                <div class="seccion-titulo" style="text-align: center; margin-bottom: 2rem;">
+                    <h1>Blog de entrenamiento</h1>
+                    <p style="color: var(--color-texto-suave);">Tips, rutinas y consejos de nutrición del equipo de ProSport.</p>
+                </div>
+                <div class="grilla-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <article class="card" style="padding:0; overflow:hidden; border: 1px solid #ccc; border-radius: 8px;">
+                        <img src="img/blog-proteina.jpg" alt="Batido de proteína después del entrenamiento" style="width:100%; height:180px; object-fit:cover; border-radius:0;">
+                        <div style="padding:1rem;">
+                            <span style="font-size:0.78rem; color:var(--color-acento, #ff5722); font-weight:700;">Nutrición</span>
+                            <h3>¿Cuándo tomar la proteína whey?</h3>
+                            <p style="font-size:0.88rem; color: var(--color-texto-suave); margin: 0.5rem 0 1rem;">
+                                El momento de la ingesta puede marcar la diferencia en tus resultados. Te explicamos la ventana anabólica...
+                            </p>
+                            <a href="#" style="font-weight:600; font-size:0.9rem; text-decoration:none; color: var(--color-primario);">Leer más &rarr;</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor footer-grid">
+            <div>
+                <h3>ProSport Oberá</h3>
+                <p>Todo para tu rendimiento físico en un solo lugar.</p>
+            </div>
+            <div>
+                <h4>Páginas</h4>
+                <ul>
+                    <li><a href="productos.html">Catálogo</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

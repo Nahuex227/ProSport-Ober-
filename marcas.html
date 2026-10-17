@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcas — ProSport Oberá</title>
+    <meta name="description" content="Distribuidores autorizados de Optimum Nutrition, Nike, Under Armour y más.">
+    <!-- Enlace a tu archivo CSS general -->
+</head>
+<link rel="stylesheet" href="css/estilos.css">
+<body data-pagina="marcas">
+
+    <header class="site-header">
+        <div class="contenedor site-header__inner">
+            <a href="index.html" class="site-logo">ProSport <span>Oberá</span></a>
+            <button type="button" class="nav-toggle" data-accion="menu" aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">☰</button>
+            <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+                    <li><a href="nosotros.html" data-nav="nosotros">Nosotros</a></li>
+                    <li><a href="productos.html" data-nav="productos">Productos</a></li>
+                    <li><a href="asesoramiento.html" data-nav="asesoramiento">Asesoramiento</a></li>
+                    <li><a href="marcas.html" data-nav="marcas">Marcas</a></li>
+                    <li><a href="blog.html" data-nav="blog">Blog</a></li>
+                    <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+                    <li><a href="cuenta.html" data-nav="cuenta" id="nav-cuenta-link">Ingresar</a></li>
+                    <li>
+                        <a href="carrito.html" data-nav="carrito" class="nav-carrito-link">
+                            Carrito
+                            <span id="nav-carrito-count" class="nav-carrito-count" hidden>0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL: MARCAS -->
+    <main>
+        <section class="seccion">
+            <div class="contenedor">
+                <div class="seccion-titulo" style="text-align: center; margin-bottom: 2rem;">
+                    <h1>Marcas oficiales</h1>
+                    <p style="color: var(--color-texto-suave);">Distribuidores autorizados de las mejores marcas del mercado.</p>
+                </div>
+                <div class="grilla-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <article class="card" style="text-align:center; padding: 1.5rem; border: 1px solid #ccc; border-radius: 8px;">
+                        <img src="img/marca-on.png" alt="Logo Optimum Nutrition" style="height:80px; object-fit:contain; margin:0 auto 1rem; display: block;">
+                        <h3>Optimum Nutrition</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-texto-suave);">La marca líder mundial en proteínas y suplementos deportivos. Gold Standard Whey, BCAA, Creatina y más.</p>
+                    </article>
+                    <article class="card" style="text-align:center; padding: 1.5rem; border: 1px solid #ccc; border-radius: 8px;">
+                        <img src="img/marca-nike.png" alt="Logo Nike" style="height:80px; object-fit:contain; margin:0 auto 1rem; display: block;">
+                        <h3>Nike</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-texto-suave);">Indumentaria y calzado deportivo oficial. Remeras, shorts, zapatillas y accesorios.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor footer-grid">
+            <div>
+                <h3>ProSport Oberá</h3>
+                <p>Todo para tu rendimiento físico en un solo lugar.</p>
+            </div>
+            <div>
+                <h4>Páginas</h4>
+                <ul>
+                    <li><a href="productos.html">Catálogo</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

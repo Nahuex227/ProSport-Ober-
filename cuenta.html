@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi cuenta — ProSport Oberá</title>
+    <meta name="description" content="Ingresá o creá tu cuenta ProSport Oberá.">
+    <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-pagina="cuenta">
+
+    <header class="site-header">
+        <div class="contenedor site-header__inner">
+            <a href="index.html" class="site-logo">ProSport <span>Oberá</span></a>
+            <button type="button" class="nav-toggle" data-accion="menu" aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">☰</button>
+            <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+                    <li><a href="nosotros.html" data-nav="nosotros">Nosotros</a></li>
+                    <li><a href="productos.html" data-nav="productos">Productos</a></li>
+                    <li><a href="asesoramiento.html" data-nav="asesoramiento">Asesoramiento</a></li>
+                    <li><a href="marcas.html" data-nav="marcas">Marcas</a></li>
+                    <li><a href="blog.html" data-nav="blog">Blog</a></li>
+                    <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+                    <li><a href="cuenta.html" data-nav="cuenta" id="nav-cuenta-link" class="activo">Ingresar</a></li>
+                    <li>
+                        <a href="carrito.html" data-nav="carrito" class="nav-carrito-link">
+                            Carrito
+                            <span id="nav-carrito-count" class="nav-carrito-count" hidden>0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion">
+            <div class="contenedor cuenta-layout">
+                <h1>Mi cuenta</h1>
+                <p class="catalogo-intro">Registrate con email o ingresá con Google. Los pedidos quedan vinculados si iniciás sesión antes del checkout.</p>
+
+                <p id="cuenta-aviso" class="cuenta-aviso" hidden role="status"></p>
+
+                <div id="cuenta-sesion" class="cuenta-panel" hidden>
+                    <div class="formulario cuenta-panel-card">
+                        <p>Sesión activa: <strong id="cuenta-email"></strong></p>
+                        <button type="button" id="btn-salir" class="boton boton-primario">Cerrar sesión</button>
+                    </div>
+
+                    <section class="cuenta-pedidos" aria-labelledby="titulo-mis-pedidos">
+                        <h2 id="titulo-mis-pedidos">Mis pedidos</h2>
+                        <p id="pedidos-cargando" class="catalogo-intro">Cargando pedidos…</p>
+                        <p id="pedidos-vacio" class="catalogo-intro" hidden>Todavía no tenés pedidos. <a href="productos.html">Ir al catálogo</a></p>
+                        <p id="pedidos-error" class="cuenta-aviso cuenta-aviso--error" hidden></p>
+                        <div id="pedidos-lista" class="pedidos-lista"></div>
+                    </section>
+                </div>
+
+                <div id="cuenta-forms" class="cuenta-panel">
+                    <div class="cuenta-tabs">
+                        <button type="button" class="cuenta-tab activo" data-tab-auth="login">Ingresar</button>
+                        <button type="button" class="cuenta-tab" data-tab-auth="registro">Registrarme</button>
+                    </div>
+
+                    <div id="panel-login" class="formulario">
+                        <form id="form-login">
+                            <div class="campo">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" name="email" required autocomplete="email">
+                            </div>
+                            <div class="campo">
+                                <label for="login-clave">Contraseña</label>
+                                <input type="password" id="login-clave" name="clave" required minlength="6" autocomplete="current-password">
+                            </div>
+                            <div id="turnstile-login" class="turnstile-box" data-turnstile-mount></div>
+                            <button type="submit" class="boton boton-primario boton-ancho">Ingresar</button>
+                        </form>
+                    </div>
+
+                    <div id="panel-registro" class="formulario" hidden>
+                        <form id="form-registro">
+                            <div class="campo">
+                                <label for="reg-email">Email</label>
+                                <input type="email" id="reg-email" name="email" required autocomplete="email">
+                            </div>
+                            <div class="campo">
+                                <label for="reg-clave">Contraseña (mín. 6)</label>
+                                <input type="password" id="reg-clave" name="clave" required minlength="6" autocomplete="new-password">
+                            </div>
+                            <div id="turnstile-registro" class="turnstile-box" data-turnstile-mount></div>
+                            <button type="submit" class="boton boton-primario boton-ancho">Crear cuenta</button>
+                        </form>
+                    </div>
+
+                    <div class="cuenta-oauth">
+                        <p>O continuá con</p>
+                        <button type="button" id="btn-google" class="boton boton-google boton-ancho">Google</button>
+                        <p class="cuenta-nota">Para Google: activá el proveedor en Supabase › Authentication › Providers y agregá esta URL en Redirect URLs: <code id="redirect-url"></code></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor footer-grid">
+            <div>
+                <h3>ProSport Oberá</h3>
+                <p>Todo para tu rendimiento físico en un solo lugar.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/captcha.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      document.getElementById("redirect-url").textContent = PS.auth.urlRedirect();
+    </script>
+</body>
+</html>

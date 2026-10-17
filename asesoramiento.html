@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesoramiento gratuito — ProSport Oberá</title>
+    <meta name="description" content="Te recomendamos el suplemento ideal según tu objetivo y nivel de entrenamiento.">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-pagina="asesoramiento">
+
+    <header class="site-header">
+        <div class="contenedor site-header__inner">
+            <a href="index.html" class="site-logo">ProSport <span>Oberá</span></a>
+            <button type="button" class="nav-toggle" data-accion="menu" aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">☰</button>
+            <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+                    <li><a href="nosotros.html" data-nav="nosotros">Nosotros</a></li>
+                    <li><a href="productos.html" data-nav="productos">Productos</a></li>
+                    <li><a href="asesoramiento.html" data-nav="asesoramiento">Asesoramiento</a></li>
+                    <li><a href="marcas.html" data-nav="marcas">Marcas</a></li>
+                    <li><a href="blog.html" data-nav="blog">Blog</a></li>
+                    <li><a href="contacto.html" data-nav="contacto">Contacto</a></li>
+                    <li><a href="cuenta.html" data-nav="cuenta" id="nav-cuenta-link">Ingresar</a></li>
+                    <li>
+                        <a href="carrito.html" data-nav="carrito" class="nav-carrito-link">
+                            Carrito
+                            <span id="nav-carrito-count" class="nav-carrito-count" hidden>0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL: ASESORAMIENTO -->
+    <main>
+        <section class="seccion">
+            <div class="contenedor">
+                <div class="seccion-titulo" style="text-align: center; margin-bottom: 2rem;">
+                    <h1>Asesoramiento personalizado</h1>
+                    <p style="color: var(--color-texto-suave);">Contanos tu objetivo y te recomendamos el producto ideal.</p>
+                </div>
+                <form class="formulario" style="max-width:700px; margin:0 auto;" novalidate>
+                    <div class="campo-fila" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="campo" style="flex: 1;">
+                            <label for="as-nombre">Nombre *</label>
+                            <input type="text" id="as-nombre" required style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                        </div>
+                        <div class="campo" style="flex: 1;">
+                            <label for="as-email">Email *</label>
+                            <input type="email" id="as-email" required style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                        </div>
+                    </div>
+                    <div class="campo" style="margin-bottom: 1rem;">
+                        <label for="as-objetivo">Objetivo principal *</label>
+                        <select id="as-objetivo" required style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                            <option value="">Seleccioná tu objetivo</option>
+                            <option>Ganar masa muscular</option>
+                            <option>Bajar de peso / definir</option>
+                            <option>Mejorar resistencia</option>
+                            <option>Rendimiento deportivo</option>
+                            <option>Mantenimiento general</option>
+                        </select>
+                    </div>
+                    <div class="campo-fila" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="campo" style="flex: 1;">
+                            <label for="as-deporte">Deporte que practicás</label>
+                            <input type="text" id="as-deporte" placeholder="Fútbol, gym, running, natación..." style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                        </div>
+                        <div class="campo" style="flex: 1;">
+                            <label for="as-nivel">Nivel de experiencia</label>
+                            <select id="as-nivel" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                                <option>Principiante (menos de 6 meses)</option>
+                                <option>Intermedio (6 meses a 2 años)</option>
+                                <option>Avanzado (más de 2 años)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="campo" style="margin-bottom: 1rem;">
+                        <label for="as-frecuencia">Frecuencia de entrenamiento</label>
+                        <select id="as-frecuencia" style="width: 100%; padding: 0.5rem; margin-top: 0.25rem;">
+                            <option>1–2 días por semana</option>
+                            <option>3–4 días por semana</option>
+                            <option>5 o más días por semana</option>
+                        </select>
+                    </div>
+                    <div class="campo" style="margin-bottom: 1rem;">
+                        <label for="as-presupuesto">
+                            Presupuesto mensual:
+                            <strong id="val-pres" style="color:var(--color-acento, #ff5722);">$20.000</strong>
+                        </label>
+                        <input type="range" id="as-presupuesto" min="5000" max="150000" step="5000" value="20000" style="width: 100%; margin-top: 0.25rem;" oninput="document.getElementById('val-pres').textContent = '$' + Number(this.value).toLocaleString()">
+                    </div>
+                    <div class="campo" style="margin-bottom: 1.5rem;">
+                        <label for="as-notas">¿Hay algo más que debamos saber?</label>
+                        <textarea id="as-notas" placeholder="Lesiones, alergias, restricciones médicas..." style="width: 100%; padding: 0.5rem; margin-top: 0.25rem; height: 80px;"></textarea>
+                    </div>
+                    <button type="submit" class="boton boton-primario" style="width:100%; padding: 0.75rem; cursor: pointer;">Solicitar asesoramiento gratuito</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor footer-grid">
+            <div>
+                <h3>ProSport Oberá</h3>
+                <p>Todo para tu rendimiento físico en un solo lugar.</p>
+            </div>
+            <div>
+                <h4>Páginas</h4>
+                <ul>
+                    <li><a href="productos.html">Catálogo</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
